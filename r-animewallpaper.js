@@ -13,12 +13,28 @@ addEventListener("fetch", (event) => {
 * @param {Array} list
 */
 function randomChoice(list) {
-    return list[Math.floor(Math.random() * list.length)];
+  return list[Math.floor(Math.random() * list.length)];
+}
+
+function randomObjChoice(obj) {
+  var keys = Object.keys(obj);
+  return obj[keys[ keys.length * Math.random() << 0]];
 }
   
 async function requestJson(input) {
     const response = await fetch(input);
     return response.json();
+}
+
+function getGalleryImage(post) {
+    const image = randomObjChoice(post.data.media_metadata);
+    const id = image.id;
+    const m = image.m;
+    const filetype = m.substring(6);
+
+    const imageLink = `https://i.redd.it/${id}.${filetype}`;
+
+    return imageLink;
 }
   
 async function getImage(params) {
@@ -26,9 +42,13 @@ async function getImage(params) {
       `https://www.reddit.com/r/Animewallpaper/top/.json?limit=100&` + params.toString()
     )
     const post = randomChoice(data.data.children);
-  
-    const imageLink = post.data.url;
-  
+
+    var imageLink = post.data.url;
+
+    if (imageLink.includes("/gallery/")) {
+      imageLink = getGalleryImage(post);
+    }
+
     return fetch(imageLink);
 }
   
