@@ -1,12 +1,12 @@
 addEventListener("fetch", (event) => {
-    event.respondWith(
-      handleRequest(event.request).catch(
-        (err) =>
-          new Response(err.stack, {
-            status: 500,
-          })
-      )
-    );
+  event.respondWith(
+    handleRequest(event.request).catch(
+      (err) =>
+        new Response(err.stack, {
+          status: 500,
+        })
+    )
+  );
 });
   
 /**
@@ -22,43 +22,55 @@ function randomObjChoice(obj) {
 }
   
 async function requestJson(input) {
-    const response = await fetch(input);
-    return response.json();
+  const response = await fetch(input);
+  return response.json();
 }
 
 function getGalleryImage(post) {
-    const image = randomObjChoice(post.data.media_metadata);
-    const id = image.id;
-    const m = image.m;
-    const filetype = m.substring(6);
+  const image = randomObjChoice(post.data.media_metadata);
+  const id = image.id;
+  const m = image.m;
+  const filetype = m.substring(6);
 
-    const imageLink = `https://i.redd.it/${id}.${filetype}`;
+  const imageLink = `https://i.redd.it/${id}.${filetype}`;
 
-    return imageLink;
+  return imageLink;
 }
   
 async function getImage(params) {
-    const data = await requestJson(
-      `https://www.reddit.com/r/Animewallpaper/top/.json?limit=100&` + params.toString()
-    )
-    const post = randomChoice(data.data.children);
+  const data = await requestJson(
+    `https://www.reddit.com/r/Animewallpaper/top/.json?limit=100&` + params.toString()
+  )
+  const post = randomChoice(data.data.children);
 
-    var imageLink = post.data.url;
+  var imageLink = post.data.url;
 
-    if (imageLink.includes("/gallery/")) {
-      imageLink = getGalleryImage(post);
-    }
+  if (imageLink.includes("/gallery/")) {
+    imageLink = getGalleryImage(post);
+  }
 
-    return fetch(imageLink);
+  return imageLink;
 }
   
 async function handleRequest(request) {
-    const url = new URL(request.url);
-    switch (url.pathname) {
-      default:
-        if(!url.searchParams.has("t")) {
-          url.searchParams.set("t", "week")
-        }
-        return getImage(url.searchParams);
-    }
+  const url = new URL(request.url);
+  if(!url.searchParams.has("t")) {
+    url.searchParams.set("t", "week")
+  }
+  const link = await getImage(url.searchParams);
+  switch (url.pathname) {
+    case "/api":
+      const json = JSON.stringify({
+        imglink: link,
+        status: 200
+      });
+      return new Response(json, {
+        headers: {
+          'content-type': 'application/json;charset=UTF-8',
+        },
+      });
+
+    default:
+      return fetch(link);
+  }
 }

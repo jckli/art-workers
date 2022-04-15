@@ -1,19 +1,19 @@
 addEventListener("fetch", (event) => {
-    event.respondWith(
-      handleRequest(event.request).catch(
-        (err) =>
-          new Response(err.stack, {
-            status: 500,
-          })
-      )
-    );
+  event.respondWith(
+    handleRequest(event.request).catch(
+      (err) =>
+        new Response(err.stack, {
+          status: 500,
+        })
+    )
+  );
 });
   
 /**
 * @param {Array} list
 */
 function randomChoice(list) {
-    return list[Math.floor(Math.random() * list.length)];
+  return list[Math.floor(Math.random() * list.length)];
 }
 
 function randomObjChoice(obj) {
@@ -22,8 +22,8 @@ function randomObjChoice(obj) {
 }
   
 async function requestJson(input) {
-    const response = await fetch(input);
-    return response.json();
+  const response = await fetch(input);
+  return response.json();
 }
 
 function getGalleryImage(post) {
@@ -49,16 +49,28 @@ async function getImage(params) {
     imageLink = getGalleryImage(post);
   }
 
-  return fetch(imageLink);
+  return imageLink;
 }
   
 async function handleRequest(request) {
-    const url = new URL(request.url);
-    switch (url.pathname) {
-      default:
-        if(!url.searchParams.has("t")) {
-          url.searchParams.set("t", "month")
-        }
-        return getImage(url.searchParams);
-    }
+  const url = new URL(request.url);
+  if(!url.searchParams.has("t")) {
+    url.searchParams.set("t", "month")
+  }
+  const link = await getImage(url.searchParams);
+  switch (url.pathname) {
+    case "/api":
+      const json = JSON.stringify({
+        imglink: link,
+        status: 200
+      });
+      return new Response(json, {
+        headers: {
+          'content-type': 'application/json;charset=UTF-8',
+        },
+      });
+
+    default:
+      return fetch(link);
+  }
 }
