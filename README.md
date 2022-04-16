@@ -18,7 +18,7 @@ Repository to store various Cloudflare workers for different anime art sources.
 - [animehoodies](https://animehoodies.jackli.dev/): Year
 - [animewallpaper](https://aniwp.jackli.dev/): Week
 - [moescape](https://moescape.jackli.dev/): Month
-- [wholesomeyuri](https://wsyuri.jackli.dev/): week
+- [wholesomeyuri](https://wsyuri.jackli.dev/): Week
 
 ## Parameters
 
