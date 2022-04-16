@@ -22,3 +22,5 @@ Repository to store various Cloudflare workers for different anime art sources.
 
 `t` - Timeframe to fetch images from, one of (hour, day, week, month, year, all)
 
+`sort` - Sort by, one of (hot, top, new, rising, controversial)
+

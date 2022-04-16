@@ -38,8 +38,10 @@ function getGalleryImage(post) {
 }
 
 async function getImage(params) {
+  const sort = params.get("sort")
+  params.delete("sort")
   const data = await requestJson(
-    `https://www.reddit.com/r/Moescape/top/.json?limit=100&` + params.toString()
+    `https://www.reddit.com/r/moescape/${sort}/.json?limit=100&` + params.toString()
   )
   const post = randomChoice(data.data.children);
 
@@ -56,6 +58,9 @@ async function handleRequest(request) {
   const url = new URL(request.url);
   if(!url.searchParams.has("t")) {
     url.searchParams.set("t", "month")
+  }
+  if (!url.searchParams.has("sort")) {
+    url.searchParams.set("sort", "top")
   }
   const link = await getImage(url.searchParams);
   switch (url.pathname) {
