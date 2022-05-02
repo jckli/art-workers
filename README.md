@@ -34,7 +34,15 @@ Repository to store various Cloudflare workers for different anime art sources.
 
 ## Parameters
 
-#### Subreddits
+### Art Sites
+
+#### Pixiv
+
+`mode` - Rank by, one of (day, week, month, day_male, day_female, week_original, week_rookie, day_r18, day_male_r18, day_female_r18, week_r18, week_r18g)
+
+`date` - Date to fetch images from, formatted like "yyyy-mm-dd"
+
+### Subreddits
 
 `t` - Timeframe to fetch images from, one of (hour, day, week, month, year, all)
 
