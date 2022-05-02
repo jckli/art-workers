@@ -4,7 +4,13 @@ Repository to store various Cloudflare workers for different anime art sources.
 
 ## Links
 
-### Links & References
+### References & Links
+
+#### Art Sites
+
+- [Pixiv](https://www.pixiv.net/) - https://pximg.jackli.dev/
+
+#### Subreddits
 
 - [r/streetmoe](https://www.reddit.com/r/streetmoe/) - https://streetmoe.jackli.dev/
 - [r/animehoodies](https://www.reddit.com/r/animehoodies/) - https://animehoodies.jackli.dev/
@@ -14,6 +20,12 @@ Repository to store various Cloudflare workers for different anime art sources.
 
 ### Default timeframes
 
+#### Art Sites
+
+- [Pixiv](https://pximg.jackli.dev/): *Completely Random*
+
+#### Subreddits
+
 - [streetmoe](https://streetmoe.jackli.dev/): Month
 - [animehoodies](https://animehoodies.jackli.dev/): Year
 - [animewallpaper](https://aniwp.jackli.dev/): Week
@@ -21,6 +33,8 @@ Repository to store various Cloudflare workers for different anime art sources.
 - [wholesomeyuri](https://wsyuri.jackli.dev/): Week
 
 ## Parameters
+
+#### Subreddits
 
 `t` - Timeframe to fetch images from, one of (hour, day, week, month, year, all)
 
