@@ -17,6 +17,7 @@ Repository to store various Cloudflare workers for different anime art sources.
 - [r/animewallpaper](https://www.reddit.com/r/animewallpaper/) - https://aniwp.jackli.dev/
 - [r/moescape](https://www.reddit.com/r/moescape/) - https://moescape.jackli.dev/
 - [r/wholesomeyuri](https://www.reddit.com/r/wholesomeyuri/) - https://wsyuri.jackli.dev/
+- [r/awwnime](https://www.reddit.com/r/awwnime/) - https://awwnime.jackli.dev/
 
 ### Default timeframes
 
@@ -31,6 +32,7 @@ Repository to store various Cloudflare workers for different anime art sources.
 - [animewallpaper](https://aniwp.jackli.dev/): Week
 - [moescape](https://moescape.jackli.dev/): Month
 - [wholesomeyuri](https://wsyuri.jackli.dev/): Week
+- [awwnime](https://awwnime.jackli.dev/): Week
 
 ## Parameters
 
