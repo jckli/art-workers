@@ -51,11 +51,7 @@ async function getImage(params) {
     imageLink = getGalleryImage(post);
   }
 
-  if (imageLink.startsWith("https://www.reddit.com/")) {
-    await getImage(params);
-  } else {
-    return imageLink;
-  }
+  return imageLink;
 }
 
 async function handleRequest(request) {
