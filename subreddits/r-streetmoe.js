@@ -40,18 +40,24 @@ function getGalleryImage(post) {
 async function getImage(params) {
   const sort = params.get("sort")
   params.delete("sort")
-  const data = await requestJson(
-    `https://www.reddit.com/r/streetmoe/${sort}/.json?limit=100&` + params.toString()
-  )
-  const post = randomChoice(data.data.children);
 
-  var imageLink = post.data.url;
+  var i = true;
+  while (i) {
+    const data = await requestJson(
+      `https://www.reddit.com/r/streetmoe/${sort}/.json?limit=100&` + params.toString()
+    )
+    const post = randomChoice(data.data.children);
 
-  if (imageLink.includes("/gallery/")) {
-    imageLink = getGalleryImage(post);
+    var imageLink = post.data.url;
+
+    if (imageLink.includes("/gallery/")) {
+      imageLink = getGalleryImage(post);
+    }
+
+    if ([".png", ".jpg", ".gif"].some(char => imageLink.endsWith(char))) {
+      return imageLink;
+    }
   }
-
-  return imageLink;
 }
   
 async function handleRequest(request) {
