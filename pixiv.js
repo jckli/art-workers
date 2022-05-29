@@ -85,9 +85,7 @@ async function rankImage(params) {
       continue
     }
 
-    if ([".png", ".jpg", ".gif"].some(char => image.endsWith(char))) {
-      return [image, sl];
-    }
+    return [image, sl];
   }
 }
 
