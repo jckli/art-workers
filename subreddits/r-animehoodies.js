@@ -36,26 +36,33 @@ function getGalleryImage(post) {
 
   return imageLink;
 }
-
+  
 async function getImage(params) {
   const sort = params.get("sort")
   params.delete("sort")
+  const nsfw = params.get("nsfw")
+  params.delete("nsfw")
   
   var i = true;
   while (i) {
     const data = await requestJson(
-        `https://www.reddit.com/r/animehoodies/${sort}/.json?limit=100&` + params.toString()
+      `https://www.reddit.com/r/animehoodies/${sort}/.json?limit=100&` + params.toString()
     )
     const post = randomChoice(data.data.children);
 
     var imageLink = post.data.url;
+    var over_18 = post.data.over_18;
+
+    if (nsfw == "false" && over_18.toString() != nsfw) {
+      continue
+    }
 
     if (imageLink.includes("/gallery/")) {
         imageLink = getGalleryImage(post);
     }
     
     if ([".png", ".jpg", ".gif"].some(char => imageLink.endsWith(char))) {
-        return imageLink;
+        return [imageLink, over_18];
     }
   }
 }
@@ -68,11 +75,15 @@ async function handleRequest(request) {
   if (!url.searchParams.has("sort")) {
     url.searchParams.set("sort", "top")
   }
-  const link = await getImage(url.searchParams);
+  if (!url.searchParams.has("nsfw")) {
+    url.searchParams.set("nsfw", "true")
+  }
+  const image = await getImage(url.searchParams);
   switch (url.pathname) {
     case "/api":
       const json = JSON.stringify({
-        imglink: link,
+        imglink: image[0],
+        over_18: image[1],
         status: 200
       });
       return new Response(json, {
@@ -82,6 +93,6 @@ async function handleRequest(request) {
       });
 
     default:
-      return fetch(link);
+      return fetch(image[0]);
   }
 }
