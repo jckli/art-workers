@@ -18,6 +18,8 @@ Repository to store various Cloudflare workers for different anime art sources.
 - [r/moescape](https://www.reddit.com/r/moescape/) - https://moescape.jackli.dev/
 - [r/wholesomeyuri](https://www.reddit.com/r/wholesomeyuri/) - https://wsyuri.jackli.dev/
 - [r/awwnime](https://www.reddit.com/r/awwnime/) - https://awwnime.jackli.dev/
+- [r/anime_irl](https://www.reddit.com/r/anime_irl/) - https://animeirl.jackli.dev/
+- [r/saltsanime](https://www.reddit.com/r/saltsanime/) - https://saltsanime.jackli.dev/
 
 ### Default timeframes
 
@@ -33,6 +35,8 @@ Repository to store various Cloudflare workers for different anime art sources.
 - [moescape](https://moescape.jackli.dev/): Month
 - [wholesomeyuri](https://wsyuri.jackli.dev/): Week
 - [awwnime](https://awwnime.jackli.dev/): Week
+- [anime_irl](https://animeirl.jackli.dev/): Week
+- [saltsanime](https://saltsanime.jackli.dev/): Year
 
 ## Parameters
 
