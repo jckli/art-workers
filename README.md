@@ -48,9 +48,13 @@ Repository to store various Cloudflare workers for different anime art sources.
 
 `date` - Date to fetch images from, formatted like "yyyy-mm-dd"
 
+`nsfw` - Include NSFW images (default: true)
+
 ### Subreddits
 
 `t` - Timeframe to fetch images from, one of (hour, day, week, month, year, all)
 
 `sort` - Sort by, one of (hot, top, new, rising, controversial) (default: top)
+
+`nsfw` - Include NSFW images (default: true)
 
