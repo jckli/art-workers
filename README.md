@@ -20,6 +20,7 @@ Repository to store various Cloudflare workers for different anime art sources.
 - [r/awwnime](https://www.reddit.com/r/awwnime/) - https://awwnime.jackli.dev/
 - [r/anime_irl](https://www.reddit.com/r/anime_irl/) - https://animeirl.jackli.dev/
 - [r/saltsanime](https://www.reddit.com/r/saltsanime/) - https://saltsanime.jackli.dev/
+- [r/megane](https://www.reddit.com/r/megane/) - https://megane.jackli.dev/
 
 ### Default timeframes
 
@@ -37,6 +38,7 @@ Repository to store various Cloudflare workers for different anime art sources.
 - [awwnime](https://awwnime.jackli.dev/): Week
 - [anime_irl](https://animeirl.jackli.dev/): Week
 - [saltsanime](https://saltsanime.jackli.dev/): Year
+- [megane](https://megane.jackli.dev/): Year
 
 ## Parameters
 
