@@ -22,6 +22,8 @@ const subreddits = [
 	{ subreddit: "saltsanime", tp: "year" },
 	{ subreddit: "streetmoe", tp: "month" },
 	{ subreddit: "wholesomeyuri", tp: "week" },
+	{ subreddit: "cutelittlefangs", tp: "month" },
+	{ subreddit: "pouts", tp: "year" },
 ];
 
 async function handleRequest(request: Request): Promise<Response> {
