@@ -29,7 +29,7 @@ async function handleRequest(request: Request): Promise<Response> {
 		url.searchParams.set("date", formatDate(date));
 	}
 	if (!url.searchParams.has("nsfw")) {
-		url.searchParams.set("nsfw", "true");
+		url.searchParams.set("nsfw", "false");
 	}
 	const link = await rankImage(url.searchParams);
 
