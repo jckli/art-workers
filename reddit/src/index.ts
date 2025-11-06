@@ -11,35 +11,37 @@ addEventListener("fetch", (event: FetchEvent) => {
 	);
 });
 
-const subreddits = [
-	{ subreddit: "anime_irl", tp: "week" },
-	{ subreddit: "animehoodies", tp: "year" },
-	{ subreddit: "animewallpaper", tp: "week" },
-	{ subreddit: "awwnime", tp: "week" },
-	{ subreddit: "imaginarymaids", tp: "month" },
-	{ subreddit: "megane", tp: "year" },
-	{ subreddit: "moescape", tp: "month" },
-	{ subreddit: "saltsanime", tp: "year" },
-	{ subreddit: "streetmoe", tp: "month" },
-	{ subreddit: "wholesomeyuri", tp: "week" },
-	{ subreddit: "cutelittlefangs", tp: "month" },
-	{ subreddit: "pouts", tp: "year" },
-];
+const subredditConfig = {
+	anime_irl: { subreddit: "anime_irl", tp: "week" },
+	animehoodies: { subreddit: "animehoodies", tp: "year" },
+	animewallpaper: { subreddit: "animewallpaper", tp: "week" },
+	awwnime: { subreddit: "awwnime", tp: "week" },
+	imaginarymaids: { subreddit: "imaginarymaids", tp: "month" },
+	megane: { subreddit: "megane", tp: "year" },
+	moescape: { subreddit: "moescape", tp: "month" },
+	saltsanime: { subreddit: "saltsanime", tp: "year" },
+	streetmoe: { subreddit: "streetmoe", tp: "month" },
+	wholesomeyuri: { subreddit: "wholesomeyuri", tp: "week" },
+	cutelittlefangs: { subreddit: "cutelittlefangs", tp: "month" },
+	pouts: { subreddit: "pouts", tp: "year" },
+};
+const subredditList = Object.values(subredditConfig);
 
 async function handleRequest(request: Request): Promise<Response> {
 	const url = new URL(request.url);
-	// get the first part of the path, like https://reddit.jackli.dev/subreddit
-	var subreddit = url.pathname.split("/")[1] || "";
-	var pathEnd = url.pathname.split("/")[2] || "";
 
-	if (subreddit == "api") {
+	const parts = url.pathname.replace(/^\/+|\/+$/g, "").split("/");
+	let subredditName = parts[0] || "";
+	let pathEnd = parts[1] || "";
+
+	if (subredditName === "api") {
 		pathEnd = "api";
-		subreddit = "";
+		subredditName = "";
 	}
 
-	var sub = subreddits.find((s) => s.subreddit === subreddit);
+	let sub = subredditConfig[subredditName];
 	if (!sub) {
-		sub = randomChoice(subreddits);
+		sub = randomChoice(subredditList);
 	}
 
 	if (!url.searchParams.has("t")) {
@@ -52,27 +54,35 @@ async function handleRequest(request: Request): Promise<Response> {
 		url.searchParams.set("nsfw", "false");
 	}
 
-	const link = await getImage(url.searchParams, sub.subreddit);
-	switch (pathEnd) {
-		case "api":
-			const json = JSON.stringify({
-				status: 200,
-				data: {
-					illust: link[0],
-					nsfw: link[1],
-				},
-			});
-			return new Response(json, {
-				headers: {
-					"content-type":
-						"application/json;charset=UTF-8",
-				},
-			});
-		default:
-			return fetch(link[0], {
-				headers: {
-					referer: "hayasaka.moe",
-				},
-			});
+	try {
+		const [link, isNsfw] = await getImage(
+			url.searchParams,
+			sub.subreddit,
+		);
+
+		switch (pathEnd) {
+			case "api":
+				const json = JSON.stringify({
+					status: 200,
+					data: {
+						illust: link,
+						nsfw: isNsfw,
+					},
+				});
+				return new Response(json, {
+					headers: {
+						"content-type":
+							"application/json;charset=UTF-8",
+					},
+				});
+			default:
+				return fetch(link, {
+					headers: {
+						referer: "hayasaka.moe",
+					},
+				});
+		}
+	} catch (err) {
+		return new Response(err.message, { status: 500 });
 	}
 }
