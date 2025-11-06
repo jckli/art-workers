@@ -27,7 +27,6 @@ Compatible subreddits:
 - [r/megane](https://www.reddit.com/r/megane/)
 - [r/imaginarymaids](https://www.reddit.com/r/imaginarymaids/)
 - [r/cutelittlefangs](https://www.reddit.com/r/cutelittlefangs/)
-- [r/pouts](https://www.reddit.com/r/pouts/)
 
 ### Default timeframes
 
@@ -48,7 +47,6 @@ Compatible subreddits:
 - [r/megane](https://reddit.jackli.dev/megane): Year
 - [r/imaginarymaids](https://reddit.jackli.dev/imaginarymaids): Month
 - [r/cutelittlefangs](https://reddit.jackli.dev/cutelittlefangs): Month
-- [r/pouts](https://reddit.jackli.dev/pouts): Year
 
 ## Parameters
 
@@ -79,7 +77,6 @@ Compatible subreddits:
 - Base URL: `https://pximg.jackli.dev/`, Shows you a random image from Pixiv.
 
 - Pixiv Proxy URL: `https://pximg.jackli.dev/<i.pximg.net link>`, Shows you the given image proxied, as Pixiv.net doesn't allow direct viewing of images from their server.
-
      - Example: `https://pximg.jackli.dev/img-master/img/2024/07/05/20/07/20/120262337_p0_master1200.jpg`
      - Parameters do NOT work with this URL.
 
@@ -90,7 +87,6 @@ Compatible subreddits:
 - Base URL: `https://reddit.jackli.dev/`, Shows you a random image from a random subreddit.
 
 - Subreddit URL: `https://reddit.jackli.dev/<subreddit>`, Shows you a random image from the given subreddit.
-
      - Example: `https://reddit.jackli.dev/streetmoe`
      - You can append `/api` to the end of the URL to get the subreddit in a JSON formatted response.
 

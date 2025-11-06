@@ -23,7 +23,6 @@ const subredditConfig = {
 	streetmoe: { subreddit: "streetmoe", tp: "month" },
 	wholesomeyuri: { subreddit: "wholesomeyuri", tp: "week" },
 	cutelittlefangs: { subreddit: "cutelittlefangs", tp: "month" },
-	pouts: { subreddit: "pouts", tp: "year" },
 };
 const subredditList = Object.values(subredditConfig);
 
